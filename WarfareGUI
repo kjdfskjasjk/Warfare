@@ -1,0 +1,223 @@
+/**
+ * 
+ */
+package edu.cvtc.java;
+
+import java.awt.*;
+import java.awt.event.*;
+import java.util.Random;
+
+import javax.swing.*;
+
+/**
+ * @author aerickson46
+ *
+ */
+public class WarfareGUI extends JFrame {
+	public static CombatGUI combatCreate;
+	public static BossGUI bossCreate;
+	
+	private static StatsPanel stats;
+	private ShopPanel shop;
+	
+	private JPanel buttonPanel;
+	private JButton shopButton;
+	private JButton warfareButton;
+	
+	public WarfareGUI(){
+		setLayout(new BorderLayout());
+		
+		setStats(new StatsPanel());
+		shop = new ShopPanel();
+		
+		buildButtonPanel();
+		
+		add(getStats(), BorderLayout.WEST);
+		add(shop, BorderLayout.CENTER);
+		add(buttonPanel, BorderLayout.EAST);
+		
+		pack();
+		setVisible(true);
+	}
+	
+	private void buildButtonPanel(){
+		buttonPanel = new JPanel();
+		
+		shopButton = new JButton("Shop");
+		warfareButton = new JButton("Warfare");
+		
+		shopButton.addActionListener(new ShopButtonListener());
+		warfareButton.addActionListener(new WarfareButtonListener());
+		
+		buttonPanel.add(shopButton);
+		buttonPanel.add(warfareButton);
+	}
+	
+	public static StatsPanel getStats() {
+		return stats;
+	}
+
+	public static void setStats(StatsPanel stats) {
+		WarfareGUI.stats = stats;
+	}
+
+	private class ShopButtonListener implements ActionListener{
+		public void actionPerformed(ActionEvent e){
+			int goldGet;
+			int defenseGet;
+			int damageGet;
+			int troopsGet;
+			
+			goldGet = WarfareMain.getGold();
+			damageGet = WarfareMain.getDamage();
+			defenseGet = WarfareMain.getDefense();
+			troopsGet = WarfareMain.getTroops();
+			
+			if(ShopPanel.getShopCost() == ShopPanel.armorBought){
+				if(WarfareMain.gold < ShopPanel.getShopCost()){
+					
+					JOptionPane.showMessageDialog(null, "You do not have enough gold.");
+			
+				}else if(WarfareMain.gold >= ShopPanel.getShopCost()){	
+					
+					WarfareMain.setGold((int)(goldGet - ShopPanel.getShopCost()));
+					WarfareMain.setDefense(defenseGet + 25);
+					
+					StatsPanel.getGoldLabel().setText("Gold: " + WarfareMain.gold);
+					StatsPanel.getDefenseLabel().setText("Defense: " + WarfareMain.defense);
+				}	
+			}else if(ShopPanel.getShopCost() == ShopPanel.weaponBought){
+				if(WarfareMain.gold < ShopPanel.getShopCost()){
+					
+					JOptionPane.showMessageDialog(null, "You do not have enough gold.");
+			
+				}else if(WarfareMain.gold >= ShopPanel.getShopCost()){
+					
+					WarfareMain.setGold((int)(goldGet - ShopPanel.getShopCost()));
+					WarfareMain.setDamage((int)(damageGet + 15));
+					
+					StatsPanel.getGoldLabel().setText("Gold: " + WarfareMain.gold);
+					StatsPanel.getDamageLabel().setText("Damage: " + WarfareMain.damage);
+				}	
+			}else if(ShopPanel.getShopCost() == ShopPanel.mercsBought){
+				if(WarfareMain.gold < ShopPanel.getShopCost()){
+					
+					JOptionPane.showMessageDialog(null,  "You do not have enough gold.");
+		
+				}else if(WarfareMain.gold >= ShopPanel.getShopCost()){	
+					
+					WarfareMain.setGold((int)(goldGet - ShopPanel.getShopCost()));
+					WarfareMain.setTroops((int)(troopsGet + 10));
+					
+					StatsPanel.getGoldLabel().setText("Gold: " + WarfareMain.gold);
+					StatsPanel.getTroopsLabel().setText("Troops: " + WarfareMain.troops);
+				}	
+			}
+		}	
+	}
+	
+	private class WarfareButtonListener implements ActionListener{
+		public void actionPerformed(ActionEvent e){
+			Random randomEvent = new Random();
+			int value = randomEvent.nextInt(7);
+			System.out.println("value: " + value);
+			
+			if(value == 0){
+				
+				JOptionPane.showMessageDialog(null, "Although your troops are resilient they have succumbed to I.B.S.  You lose some men.");
+				WarfareMain.troops = (int)(WarfareMain.troops * .9 + 1);
+				WarfareMain.roundNumber++;
+				
+				StatsPanel.getTroopsLabel().setText("Troops: " + WarfareMain.troops);
+				StatsPanel.getRoundLabel().setText("Round: " + WarfareMain.roundNumber);
+				
+			}else if(value == 1){
+				JOptionPane.showMessageDialog(null, "You approach a village.  You ready your men and descend upon the small civilization.");
+				
+				if(CoinFlip.getCoinFlip() == "heads"){
+					
+					JOptionPane.showMessageDialog(null, "Your men take some prisoners and treasure from the village.");
+					
+					WarfareMain.troops += (int)(1000*(.75 * WarfareMain.roundNumber) / 85);
+					WarfareMain.gold += (int)(1000*(.75 * WarfareMain.roundNumber) / 85);
+					
+					StatsPanel.getGoldLabel().setText("Gold: " + WarfareMain.gold);
+					StatsPanel.getTroopsLabel().setText("Troops: " + WarfareMain.troops);
+					
+					
+				}else if(CoinFlip.getCoinFlip() == "tails"){
+					
+					JOptionPane.showMessageDialog(null, "The village was well armed.  You lose some men and thieves stole from your coffers.");
+					
+					WarfareMain.troops -= (int)(1000*(.75 * WarfareMain.roundNumber) / 85);
+					WarfareMain.gold -= (int)(1000*(.75 * WarfareMain.roundNumber) / 85);
+					
+					StatsPanel.getGoldLabel().setText("Gold: " + WarfareMain.gold);
+					StatsPanel.getTroopsLabel().setText("Troops: " + WarfareMain.troops);
+				}
+				
+				WarfareMain.roundNumber++;
+				StatsPanel.getRoundLabel().setText("Round: " + WarfareMain.roundNumber);
+					
+			}else if(value == 2){
+				
+				JOptionPane.showMessageDialog(null, "You become bored and make your army travel off the path.  You eventually realize you walked in a circle.  Nothing happens.");
+				WarfareMain.roundNumber++;
+				StatsPanel.getRoundLabel().setText("Round: " + WarfareMain.roundNumber);
+
+				
+			}else if(value == 3){
+				if(WarfareMain.warfare < 3){
+					JOptionPane.showMessageDialog(null, "A nearby army approaches.  The lay down their arms and ask to join your ranks.  You accept.");
+					
+					WarfareMain.troops = (int)(WarfareMain.troops * 1.5);
+					WarfareMain.gold = (int)(WarfareMain.gold * 1.5);
+					WarfareMain.warfare++;
+					WarfareMain.roundNumber++;
+					
+					StatsPanel.getTroopsLabel().setText("Troops: " + WarfareMain.troops);
+					StatsPanel.getGoldLabel().setText("Gold: " + WarfareMain.gold);
+					StatsPanel.getWarfareLabel().setText("Warfare: " + WarfareMain.warfare);
+					StatsPanel.getRoundLabel().setText("Round: " + WarfareMain.roundNumber);
+					
+				}else if(WarfareMain.warfare == 3){
+					
+					JOptionPane.showMessageDialog(null,  "The wind picks up but dies down quickly.  Time passes, nothing happens.");
+					WarfareMain.roundNumber++;
+					StatsPanel.getRoundLabel().setText("Round: " + WarfareMain.roundNumber);
+				}
+				
+			}else if(value == 4){
+				JOptionPane.showMessageDialog(null, "Your army approaches a lone brothel.  Deciding to show your appreciation for the troops, you buy some prostitutes." +
+						"  Your troops then begin throwing armor and weapons on the prostitutes.  You realize your men are not that intelligent.");
+				
+				WarfareMain.gold = WarfareMain.gold * 0;
+				WarfareMain.troops += 5;
+				WarfareMain.roundNumber++;
+				
+				StatsPanel.getGoldLabel().setText("Gold: " + WarfareMain.gold);
+				StatsPanel.getTroopsLabel().setText("Troops: " + WarfareMain.troops);
+				StatsPanel.getRoundLabel().setText("Round: " + WarfareMain.roundNumber);
+
+			}else if(value == 5){	
+				JOptionPane.showMessageDialog(null, "You find some treasure in a ditch.  You help yourself.");
+			
+				WarfareMain.gold += (WarfareMain.roundNumber + 1) * 45;
+				WarfareMain.roundNumber++;
+				
+				StatsPanel.getGoldLabel().setText("Gold: " + WarfareMain.gold);
+				StatsPanel.getRoundLabel().setText("Round: " + WarfareMain.roundNumber);
+				
+			}else if(value == 6){
+				if(WarfareMain.warfare < 3){
+					combatCreate = new CombatGUI();
+
+				}else if(WarfareMain.warfare == 3){
+					bossCreate = new BossGUI();
+				}	
+			}
+	
+		}
+	}	
+}
+
