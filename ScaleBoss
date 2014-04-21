@@ -1,0 +1,22 @@
+package edu.cvtc.java;
+
+public class ScaleBoss {
+	static int scaleBTroops;
+	static int scaleBDefense;
+	static int scaleBDamage;
+	
+	public static int getBossTroops(){
+		scaleBTroops = 500;
+		return scaleBTroops;
+	}
+	
+	public static int getBossDefense(){
+		scaleBDefense = (int)((scaleBTroops/2.5) + (WarfareMain.roundNumber * 2.5));
+		return scaleBDefense;
+	}
+	
+	public static int getBossDamage(){
+		scaleBDamage = (int)(scaleBTroops/2.5 + (WarfareMain.roundNumber * 2.5));
+		return scaleBDamage;
+	}
+}
