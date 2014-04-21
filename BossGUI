@@ -1,0 +1,89 @@
+package edu.cvtc.java;
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Random;
+
+import javax.swing.*;
+
+
+public class BossGUI extends JFrame {
+	public BossPanel boss;
+	
+	public JPanel fightPanel;
+	public JButton fightButton;
+	
+	public BossGUI(){
+		setLayout(new BorderLayout());
+		
+		boss = new BossPanel();
+		
+		WarfareGUI.setStats(new StatsPanel());
+		
+		buildCombatButton();
+		
+		add(boss, BorderLayout.EAST);
+		add(fightPanel, BorderLayout.CENTER);
+		add(WarfareGUI.getStats(), BorderLayout.WEST);
+		
+		pack();
+		setVisible(true);
+	}
+	
+	public void buildCombatButton(){
+		fightPanel = new JPanel();
+		
+		fightButton = new JButton("Attack");
+		
+		fightButton.addActionListener(new BossButtonListener());
+		
+		fightPanel.add(fightButton); 
+	}
+	
+	private class BossButtonListener implements ActionListener{
+		public void actionPerformed(ActionEvent e){
+			WarfareMain.bossTroops = ScaleBoss.getBossTroops();
+			WarfareMain.bossDefense = ScaleBoss.getBossDefense();
+			WarfareMain.bossDamage = ScaleBoss.getBossDamage();
+			
+			BossPanel.getbTroopsLabel().setText("Boss Troops: " + WarfareMain.bossTroops);
+			BossPanel.getbDefenseLabel().setText("Boss Defense: " + WarfareMain.bossDefense);
+			BossPanel.getbDamageLabel().setText("Boss Damage: " + WarfareMain.bossDamage);
+			
+			while(WarfareMain.bossTroops > 0){
+				JOptionPane.showMessageDialog(null, "The enemy attacks!");
+					if((getHitBDamage() - (WarfareMain.defense*.3)) < 0){
+						System.out.println("Missed!");
+					}else if((getHitBDamage() - (WarfareMain.defense*.3)) > 0);
+						WarfareMain.troops -= (getHitBDamage() - (WarfareMain.defense *.3));
+				StatsPanel.getTroopsLabel().setText("Troops: " + WarfareMain.troops);
+				System.out.println("troops: " + WarfareMain.troops);
+				
+				JOptionPane.showMessageDialog(null, "You attack!");
+					if((CombatGUI.getHitDamage() - (WarfareMain.enemyDefense * .3)) < 0){
+						System.out.println("Missed!");
+					}else if((CombatGUI.getHitDamage() - (WarfareMain.enemyDefense * .3)) > 0){
+						WarfareMain.bossTroops -= (CombatGUI.getHitDamage() - (WarfareMain.enemyDefense * .3));
+					}
+				BossPanel.getbTroopsLabel().setText("Boss Troops: " + WarfareMain.bossTroops);
+				System.out.println("emy troops: " + WarfareMain.bossTroops);
+
+				if(WarfareMain.bossTroops <= 0){
+					JOptionPane.showMessageDialog(null, "You have defeated the final enemy.  Congratulations!");
+					System.exit(0);
+				}else if(WarfareMain.troops <= 0){
+					JOptionPane.showMessageDialog(null, "You and your army dies, your families consider you a failure.");
+					System.exit(0);
+				}
+			}
+		}
+	}
+	
+	public static int getHitBDamage(){
+		int hitBDamage;
+		Random randomEvent = new Random();
+		hitBDamage = (int)(((randomEvent.nextInt(6) + 1)* 3) + (WarfareMain.bossDamage*.3));
+		return hitBDamage;
+	}
+}
