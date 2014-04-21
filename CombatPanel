@@ -1,0 +1,57 @@
+/**
+ * 
+ */
+package edu.cvtc.java;
+
+import java.awt.*;
+
+import javax.swing.*;
+
+/**
+ * @author Ashton
+ *
+ */
+public class CombatPanel extends JPanel {
+	private static JLabel eTroopsLabel;
+	private static JLabel eDefenseLabel;
+	private static JLabel eDamageLabel;
+
+	public CombatPanel(){
+		setLayout(new GridLayout(3, 1));
+
+		eTroopsLabel = new JLabel("Enemy Troops: " + ScaleEnemy.getScaleTroops());
+		eDefenseLabel = new JLabel("Enemy Defense: " + ScaleEnemy.getScaleDefense());
+		eDamageLabel = new JLabel("Enemy Damage: " + ScaleEnemy.getScaleDamage());
+
+		setBorder(BorderFactory.createTitledBorder("Enemy"));
+		
+		add(eTroopsLabel);
+		add(eDefenseLabel);
+		add(eDamageLabel);
+	}
+
+	public static JLabel geteTroopsLabel() {
+		return eTroopsLabel;
+	}
+
+	public void seteTroopsLabel(JLabel eTroopsLabel) {
+		this.eTroopsLabel = eTroopsLabel;
+	}
+
+	public static JLabel geteDefenseLabel() {
+		return eDefenseLabel;
+	}
+
+	public void seteDefenseLabel(JLabel eDefenseLabel) {
+		this.eDefenseLabel = eDefenseLabel;
+	}
+
+	public static JLabel geteDamageLabel() {
+		return eDamageLabel;
+	}
+
+	public void seteDamageLabel(JLabel eDamageLabel) {
+		this.eDamageLabel = eDamageLabel;
+	}
+	
+}
