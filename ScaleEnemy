@@ -1,0 +1,22 @@
+package edu.cvtc.java;
+
+public class ScaleEnemy {
+	static int scaleTroops;
+	static int scaleDefense;		
+	static int scaleDamage;
+	
+	public static int getScaleTroops() {
+		scaleTroops = (int)(WarfareMain.getTroops() + (WarfareMain.roundNumber *3.5));		
+		return scaleTroops;
+	}
+	
+	public static int getScaleDefense(){
+		scaleDefense = (int)((WarfareMain.getEnemyTroops() / 5) + (WarfareMain.roundNumber * 3.5));
+		return scaleDefense;
+	}	
+	
+	public static int getScaleDamage(){
+		scaleDamage = (int)(WarfareMain.getEnemyTroops() + (WarfareMain.roundNumber * 3.5));
+		return scaleDamage;
+	}
+}
