@@ -1,0 +1,92 @@
+/**
+ * 
+ */
+package edu.cvtc.java;
+
+import java.awt.*;
+
+import javax.swing.*;
+
+/**
+ * @author aerickson46
+ *
+ */
+public class StatsPanel extends JPanel {
+
+	private static JLabel goldLabel;
+	private static JLabel troopsLabel;
+	private static JLabel damageLabel;
+	private static JLabel defenseLabel;
+	private static JLabel roundLabel;
+	private static JLabel warfareLabel;
+	
+	public StatsPanel(){
+		setLayout(new GridLayout(6,1));
+		
+		setGoldLabel(new JLabel("Gold: " + WarfareMain.getGold()));
+		troopsLabel = new JLabel("Troops: " + WarfareMain.getTroops());
+		damageLabel = new JLabel("Damage: " + WarfareMain.getDamage());
+		defenseLabel = new JLabel("Defense: " + WarfareMain.getDefense());
+		roundLabel = new JLabel("Round: " + WarfareMain.getRoundNumber());
+		warfareLabel = new JLabel("Warfare: " + WarfareMain.getWarfare());
+		
+		setBorder(BorderFactory.createTitledBorder("Stats"));
+		
+		add(getGoldLabel());
+		add(troopsLabel);
+		add(damageLabel);
+		add(defenseLabel);
+		add(roundLabel);
+		add(warfareLabel);
+
+	}
+
+	public static JLabel getGoldLabel() {
+		return goldLabel;
+	}
+
+	public void setGoldLabel(JLabel goldLabel) {
+		this.goldLabel = goldLabel;
+	}
+
+	public static JLabel getTroopsLabel() {
+		return troopsLabel;
+	}
+
+	public void setTroopsLabel(JLabel troopsLabel) {
+		this.troopsLabel = troopsLabel;
+	}
+
+	public static JLabel getDamageLabel() {
+		return damageLabel;
+	}
+
+	public void setDamageLabel(JLabel damageLabel) {
+		this.damageLabel = damageLabel;
+	}
+
+	public static JLabel getDefenseLabel() {
+		return defenseLabel;
+	}
+
+	public void setDefenseLabel(JLabel defenseLabel) {
+		this.defenseLabel = defenseLabel;
+	}
+
+	public static JLabel getRoundLabel() {
+		return roundLabel;
+	}
+
+	public void setRoundLabel(JLabel roundLabel) {
+		this.roundLabel = roundLabel;
+	}
+
+	public static JLabel getWarfareLabel() {
+		return warfareLabel;
+	}
+
+	public void setWarfareLabel(JLabel warfareLabel) {
+		this.warfareLabel = warfareLabel;
+	}
+
+}
