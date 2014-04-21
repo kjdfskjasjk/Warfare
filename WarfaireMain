@@ -1,0 +1,120 @@
+/**
+ * 
+ */
+package edu.cvtc.java;
+
+/**
+ * @author aerickson46
+ *
+ */
+public class WarfareMain {
+	public static WarfareGUI warfareGame;
+	
+	public static int defense;
+	public static int troops;
+	public static int damage;
+	public static int gold;
+	public static int roundNumber;
+	public static int warfare;
+	
+	public static int enemyTroops;
+	public static int enemyDefense;
+	public static int enemyDamage;
+
+	public static int bossTroops;
+	public static int bossDefense;
+	public static int bossDamage;
+	
+	public static void main(String[] args) {
+		defense = 20;
+		troops = 100;
+		damage = 100;
+		gold = 1000;
+		roundNumber = 0;
+		warfare = 0;
+		
+		warfareGame = new WarfareGUI();
+	}
+
+	public static WarfareGUI getWarfareGame() {
+		return warfareGame;
+	}
+
+	public static void setWarfareGame(WarfareGUI warfareGame) {
+		WarfareMain.warfareGame = warfareGame;
+	}
+
+	public static int getDefense() {
+		return defense;
+	}
+
+	public static void setDefense(int defense) {
+		WarfareMain.defense = defense;
+	}
+
+	public static int getTroops() {
+		return troops;
+	}
+
+	public static void setTroops(int troops) {
+		WarfareMain.troops = troops;
+	}
+
+	public static int getDamage() {
+		return damage;
+	}
+
+	public static void setDamage(int damage) {
+		WarfareMain.damage = damage;
+	}
+
+	public static int getGold() {
+		return gold;
+	}
+
+	public static void setGold(int gold) {
+		WarfareMain.gold = gold;
+	}
+
+	public static int getRoundNumber() {
+		return roundNumber;
+	}
+
+	public static void setRoundNumber(int roundNumber) {
+		WarfareMain.roundNumber = roundNumber;
+	}
+
+	public static int getWarfare() {
+		return warfare;
+	}
+
+	public static void setWarfare(int warfare) {
+		WarfareMain.warfare = warfare;
+	}
+	
+	
+	public static int getEnemyTroops() {
+		return enemyTroops;
+	}
+
+	public static void setEnemyTroops(int enemyTroops) {
+		WarfareMain.enemyTroops = enemyTroops;
+	}
+
+	public static int getEnemyDefense() {
+		return enemyDefense;
+	}
+
+	public static void setEnemyDefense(int enemyDefense) {
+		WarfareMain.enemyDefense = enemyDefense;
+	}
+
+	public static int getEnemyDamage() {
+		return enemyDamage;
+	}
+
+	public static void setEnemyDamage(int enemyDamage) {
+		WarfareMain.enemyDamage = enemyDamage;
+	}
+	
+}
