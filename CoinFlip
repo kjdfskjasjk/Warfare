@@ -1,0 +1,22 @@
+/**
+ * 
+ */
+package edu.cvtc.java;
+
+/**
+ * @author Ashton
+ *
+ */
+public class CoinFlip {
+	public static String coinFlip;
+
+	public static String getCoinFlip(){
+		String coinFlip;
+		
+		if(Math.random() < 0.5)
+			coinFlip = "heads";
+		else
+			coinFlip = "tails";
+		return coinFlip;
+	}
+}
