@@ -1,0 +1,49 @@
+package edu.cvtc.java;
+
+import java.awt.*;
+
+import javax.swing.*;
+
+public class BossPanel extends JPanel {
+	private static JLabel bTroopsLabel;
+	private static JLabel bDefenseLabel;
+	private static JLabel bDamageLabel;
+	
+	public BossPanel(){
+		setLayout(new GridLayout(3,1));
+				
+		bTroopsLabel = new JLabel("Boss Troops: " + WarfareMain.bossTroops);
+		bDefenseLabel = new JLabel("Boss Defense: " + WarfareMain.bossDefense);
+		bDamageLabel = new JLabel("Boss Damage: " + WarfareMain.bossDamage);
+		
+		setBorder(BorderFactory.createTitledBorder("Boss"));
+		
+		add(bTroopsLabel);
+		add(bDefenseLabel);
+		add(bDamageLabel);
+	}
+	
+	public static JLabel getbTroopsLabel() {
+		return bTroopsLabel;
+	}
+
+	public void setbTroopsLabel(JLabel bTroopsLabel) {
+		this.bTroopsLabel = bTroopsLabel;
+	}
+
+	public static JLabel getbDefenseLabel() {
+		return bDefenseLabel;
+	}
+
+	public void setbDefenseLabel(JLabel bDefenseLabel) {
+		this.bDefenseLabel = bDefenseLabel;
+	}
+
+	public static JLabel getbDamageLabel() {
+		return bDamageLabel;
+	}
+
+	public void setbDamageLabel(JLabel bDamageLabel) {
+		this.bDamageLabel = bDamageLabel;
+	}
+}
