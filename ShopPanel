@@ -1,0 +1,70 @@
+/**
+ * 
+ */
+package edu.cvtc.java;
+
+import java.awt.*;
+
+import javax.swing.*;
+
+
+/**
+ * @author aerickson46
+ *
+ */
+public class ShopPanel extends JPanel {
+	public static int armorBought = 500;
+	public static int weaponBought = 350;
+	public static int mercsBought = 100;
+	public static int shopCost;
+	
+	private JLabel armorLabel;
+	private JLabel weaponLabel;
+	private JLabel mercsLabel;
+	
+	private static JRadioButton armorButton;
+	private static JRadioButton weaponButton;
+	private static JRadioButton mercsButton;
+	
+	private ButtonGroup bg;
+	
+	public ShopPanel(){
+		setLayout(new GridLayout(6,1));
+		
+		armorButton = new JRadioButton("Armor ", true);
+		weaponButton = new JRadioButton("Weapons ");
+		mercsButton = new JRadioButton("Mercenaries ");
+		
+		armorLabel = new JLabel("1 Armor / 500 Gold");
+		weaponLabel = new JLabel("1 Weapon / 350 Gold");
+		mercsLabel = new JLabel("10 Troops / 100 Gold");
+		
+		bg = new ButtonGroup();
+		bg.add(armorButton);
+		bg.add(weaponButton);
+		bg.add(mercsButton);
+		
+		setBorder(BorderFactory.createTitledBorder("Shop"));
+		
+		add(armorButton);
+		add(armorLabel);
+		add(weaponButton);
+		add(weaponLabel);
+		add(mercsButton);
+		add(mercsLabel);
+	}
+	
+	public static double getShopCost(){
+		shopCost = 0;
+		
+		if(armorButton.isSelected())
+			shopCost = armorBought;
+		else if(weaponButton.isSelected())
+			shopCost = weaponBought;
+		else if(mercsButton.isSelected())
+			shopCost = mercsBought;
+		
+		return shopCost;
+	}
+	
+}
